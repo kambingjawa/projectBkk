@@ -4,11 +4,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InfoAlumniController;
 use App\Http\Controllers\ProfileBkkController;
 use App\Http\Controllers\InfoLowonganController;
-
-
 use Illuminate\Support\Facades\Route;
 
-Route::get('/home', [DashboardController::class,'home'])->name('home');
+Route::get('/', [DashboardController::class,'home'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -26,6 +24,6 @@ route::get('/infoalumni',[InfoAlumniController::class, 'infoalumni'])->name('inf
 
 route::get('/infolowongan',[InfoLowonganController::class, 'infolowongan'])->name('infolowongan');
 
-route::get('/profilebkk',[InfoLowonganController::class, 'profilebkk'])->name('profilebkk');
+route::get('/profilebkk',[ProfileBkkController::class, 'profilebkk'])->name('profilebkk');
 
 require __DIR__.'/auth.php';
