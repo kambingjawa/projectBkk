@@ -37,7 +37,7 @@
             <span class="text-white">Info Alumni</span>
           </div>
         </a>
-        <a href="#" class="block">
+        <a href="{{ route('formalumni') }}" class="block">
           <div class="bg-yellow-500 p-4 rounded-lg flex items-center text-lg w-full h-32">
             <img src="{{ asset('images/form.alumni.png') }}" alt="Form Alumni" class="h-12 mr-3" />
             <span class="text-white">Form Alumni</span>

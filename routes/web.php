@@ -4,6 +4,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InfoAlumniController;
 use App\Http\Controllers\ProfileBkkController;
 use App\Http\Controllers\InfoLowonganController;
+use App\Http\Controllers\FormAlumniController;
+
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class,'home'])->name('home');
@@ -11,6 +14,8 @@ Route::get('/', [DashboardController::class,'home'])->name('home');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -25,5 +30,11 @@ route::get('/infoalumni',[InfoAlumniController::class, 'infoalumni'])->name('inf
 route::get('/infolowongan',[InfoLowonganController::class, 'infolowongan'])->name('infolowongan');
 
 route::get('/profilebkk',[ProfileBkkController::class, 'profilebkk'])->name('profilebkk');
+
+route::get('/formalumni',[FormAlumniController::class, 'formalumni'])->name('formalumni');
+
+Route::post('/formalumni/store', [FormAlumniController::class, 'store'])->name('formalumni.store');
+
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 require __DIR__.'/auth.php';

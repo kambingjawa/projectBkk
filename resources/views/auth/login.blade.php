@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sign Up - BKK SMKN 1 Bengkulu</title>
+  <title>Login - BKK SMKN 1 Bengkulu</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome (optional) -->
@@ -53,7 +53,7 @@
         </div>
         <!-- Tombol Submit -->
         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition w-full">
-          Sign In
+          Login
         </button>
       </form>
     </div>
