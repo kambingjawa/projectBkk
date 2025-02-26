@@ -9,4 +9,6 @@ class InfoLowonganController extends Controller
     public function infolowongan(){
         return view('infolowongan');
     }
+
+    
 }

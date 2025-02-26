@@ -5,35 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - BKK SMKN 1 Bengkulu</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Helvetica ;
+            font-family: 'Montserrat', sans-serif;
         }
-        .content {
-            align-items: flex-start;
-        }
-        .text-container {
-            text-align: left;
-        }
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-            nav {
-                margin-top: 10px;
-            }
-            .content {
-                flex-direction: column;
-                text-align: center;
-                align-items: center;
-            }
-            .text-container {
-                text-align: center;
-            }
-            .content img {
-                width: 80%;
-            }
+        h1 {
+            font-family: 'Nunito', sans-serif;
         }
     </style>
 </head>
@@ -49,8 +27,8 @@
             <a href="{{ route('profilebkk') }}" class="hover:underline">PROFIL</a>
         </nav>
     </header>
-    <div class="flex flex-col md:flex-row items-center justify-center min-h-screen px-6 content">
-        <div class="md:w-1/2 text-container">
+    <div class="flex flex-col md:flex-row items-center justify-center min-h-screen px-6">
+        <div class="md:w-1/2 text-left md:text-left">
             <h1 class="text-white font-bold text-4xl md:text-5xl">SELAMAT DATANG</h1>
             <p class="text-white mt-2 text-lg">Dihalaman Web</p>
             <p class="text-white mt-2 text-lg">Bursa Kerja Khusus</p>
