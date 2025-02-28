@@ -5,40 +5,9 @@
         </h2>
     </x-slot>
 
+    
+
     <div class="flex min-h-screen bg-gray-200">
-        <!-- Sidebar -->
-        <div class="w-64 bg-gray-800 text-white p-6">
-            <!-- Tombol Hamburger -->
-            <button id="hamburgerButton" class="lg:hidden p-2 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-
-            <h2 class="font-bold text-lg mb-6">Info Alumni</h2>
-            <!-- Menu yang bisa ditutup/dibuka -->
-            <div id="menuContainer">
-                <ul class="space-y-2">
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded transition duration-200">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                            </svg>
-                            <span>Tambah Lowongan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="flex items-center p-2 text-gray-300 hover:bg-gray-700 rounded transition duration-200">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                            </svg>
-                            <span>Tambah Informasi</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
         <!-- Main Content -->
         <div class="flex-1 p-6">
             <!-- Search Bar -->
@@ -111,14 +80,4 @@
             </div>
         </div>
     </div>
-
-    <!-- JavaScript untuk Toggle Menu -->
-    <script>
-        const hamburgerButton = document.getElementById('hamburgerButton');
-        const menuContainer = document.getElementById('menuContainer');
-
-        hamburgerButton.addEventListener('click', () => {
-            menuContainer.classList.toggle('hidden');
-        });
-    </script>
 </x-app-layout>
