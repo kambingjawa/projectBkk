@@ -5,6 +5,7 @@ use App\Http\Controllers\InfoAlumniController;
 use App\Http\Controllers\ProfileBkkController;
 use App\Http\Controllers\InfoLowonganController;
 use App\Http\Controllers\FormAlumniController;
+use App\Http\Controllers\StatistikController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,13 @@ Route::post('/formalumni/store', [FormAlumniController::class, 'store'])->name('
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+route::get('statistik',[StatistikController::class, 'statistik'])->name('statistik');
+
+Route::get('/alumni', [FormAlumniController::class, 'index'])->name('alumni.index');
+Route::get('/alumni/{id}/edit', [FormAlumniController::class, 'edit'])->name('alumni.edit');
+Route::put('/formalumni/{id}', [FormAlumniController::class, 'update'])->name('formalumni.update');
+
+Route::delete('/alumni/{id}', [FormAlumniController::class, 'destroy'])->name('alumni.destroy');
+
+
+require __DIR__.'/auth.php';  

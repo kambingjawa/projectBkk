@@ -1,79 +1,90 @@
-<!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard - BKK SMKN 1 Bengkulu</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  <style>
-    body { font-family: Helvetica, Arial, sans-serif; }
-  </style>
+    <title>Statistik Alumni</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-gradient-to-b from-blue-600 to-blue-300 flex flex-col justify-between">
-
-  <!-- Header -->
-  <header class="flex justify-between items-center p-6">
-    <div class="flex items-center space-x-4">
-      <img src="{{ asset('images/bkk.svg') }}" alt="BKK SMKN 1 Bengkulu" class="h-12" />
-      <span class="text-white font-bold text-lg">BKK SMKN 1 KOTA BENGKULU</span>
+<body class="bg-gradient-to-b from-blue-500 to-blue-300 text-white text-center p-5">
+    <h2 class="text-2xl font-bold">Statistik Data Bursa Kerjo Kito</h2>
+    <div class="bg-gray-300 text-black p-3 rounded-lg inline-block my-4">
+        <p>Total Seluruh Data Alumni</p>
+        <span class="bg-green-700 text-white px-4 py-1 rounded-lg font-bold">TOTAL</span>
     </div>
-    <nav class="space-x-6 text-white text-lg">
-      <a href="{{ route('home') }}" class="hover:underline">HOME</a>
-      <a href="{{ route('menu') }}" class="hover:underline">MENU</a>
-      <a href="{{ route('profilebkk') }}" class="hover:underline">PROFIL</a>
-    </nav>
-  </header>
+    <div class="container mx-auto p-5 bg-white text-black rounded-lg shadow-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="bg-white p-4 rounded-lg shadow">
+                <canvas id="chartJurusan"></canvas>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <canvas id="chartTahun"></canvas>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <canvas id="chartGaji"></canvas>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <canvas id="chartProfesi"></canvas>
+            </div>
+        </div>
+    </div>
 
-  <!-- Main Content -->
-  <main class="p-6 flex-grow container mx-auto">
-    <!-- Menu Alumni -->
-    <section class="bg-gray-200 p-4 rounded-lg shadow-md mb-6">
-      <h2 class="font-bold text-lg mb-2">MENU ALUMNI</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <a href="{{ route('infoalumni') }}" class="block">
-          <div class="bg-red-400 p-4 rounded-lg flex items-center text-lg w-full h-32">
-            <img src="{{ asset('images/alumni.png') }}" alt="Info Alumni" class="h-12 mr-3" />
-            <span class="text-white">Info Alumni</span>
-          </div>
-        </a>
-        <a href="{{ route('formalumni') }}" class="block">
-          <div class="bg-yellow-500 p-4 rounded-lg flex items-center text-lg w-full h-32">
-            <img src="{{ asset('images/form.alumni.png') }}" alt="Form Alumni" class="h-12 mr-3" />
-            <span class="text-white">Form Alumni</span>
-          </div>
-        </a>
-        <a href="{{ route('infolowongan') }}" class="block">
-          <div class="bg-green-500 p-4 rounded-lg flex items-center text-lg w-full h-32">
-            <img src="{{ asset('images/lowongan.kerja.png') }}" alt="Lowongan Kerja" class="h-12 mr-3" />
-            <span class="text-white">Lowongan Kerja</span>
-          </div>
-        </a>
-      </div>
-    </section>
+<script>
+    const ctxJurusan = document.getElementById('chartJurusan').getContext('2d');
+    new Chart(ctxJurusan, {
+        type: 'bar',
+        data: {
+            labels: ['PPLG', 'TJKT', 'DKV', 'ULP', 'PM', 'MPLB', 'AKL', 'AM'],
+            datasets: [{
+                label: 'Jumlah Data Lulusan',
+                data: [50, 50, 50, 50, 50, 50, 50, 50],
+                backgroundColor: 'red'
+            }]
+        }
+    });
 
-    <!-- Menu Admin -->
-    <section class="bg-gray-200 p-4 rounded-lg shadow-md">
-      <h2 class="font-bold text-lg mb-2">MENU ADMIN</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <a href="{{ route('login') }}" class="block">
-          <div class="bg-green-600 p-4 rounded-lg flex items-center text-lg w-full h-32">
-            <img src="{{ asset('images/statistik.png') }}" alt="Data Alumni" class="h-12 mr-3" />
-            <span class="text-white">Data Alumni</span>
-          </div>
-        </a>
-        <a href="#" class="block">
-          <div class="bg-blue-500 p-4 rounded-lg flex items-center text-lg w-full h-32">
-            <img src="{{ asset('images/statistik.png') }}" alt="Statistik Alumni" class="h-12 mr-3" />
-            <span class="text-white">Statistik Alumni</span>
-          </div>
-        </a>
-      </div>
-    </section>
-  </main>
+    const ctxTahun = document.getElementById('chartTahun').getContext('2d');
+    new Chart(ctxTahun, {
+        type: 'line',
+        data: {
+            labels: ['PPLG', 'TJKT', 'DKV', 'ULP', 'PM', 'MPLB', 'AKL', 'AM'],
+            datasets: [{
+                label: 'Lulusan Tahun Lalu',
+                data: [10, 15, 8, 12, 9, 14, 7, 11],
+                borderColor: 'orange'
+            }, {
+                label: 'Lulusan Tahun Ini',
+                data: [20, 18, 25, 22, 28, 30, 27, 35],
+                borderColor: 'blue'
+            }]
+        }
+    });
 
-  
-  <footer class="bg-blue-800 text-white p-6 mt-8">
+    const ctxGaji = document.getElementById('chartGaji').getContext('2d');
+    new Chart(ctxGaji, {
+        type: 'pie',
+        data: {
+            labels: ['<= 2.500.000', '2.500.000 - 5.000.000', '5.000.000 - 15.000.000', '> 15.000.000'],
+            datasets: [{
+                data: [25, 30, 20, 25],
+                backgroundColor: ['red', 'blue', 'purple', 'green']
+            }]
+        }
+    });
+
+    const ctxProfesi = document.getElementById('chartProfesi').getContext('2d');
+    new Chart(ctxProfesi, {
+        type: 'doughnut',
+        data: {
+            labels: ['Kuliah', 'Bekerja', 'Wirausaha', 'Menganggur'],
+            datasets: [{
+                data: [30, 40, 20, 10],
+                backgroundColor: ['red', 'green', 'blue', 'gray']
+            }]
+        }
+    });
+
+</script>
+
+<footer class="bg-blue-800 text-white p-6 mt-8">
     <!-- Grid dengan dua kolom: Logo & Informasi (kiri) & Ikon Sosial Media (kanan) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center md:text-left">
       <!-- Kolom Logo & Informasi -->

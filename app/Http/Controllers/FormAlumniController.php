@@ -50,4 +50,43 @@ class FormAlumniController extends Controller
 
         dd(DB::getQueryLog()); // Cek query yang dieksekusi
     }
+
+
+public function edit($id)
+{
+    $alumni = Alumni::findOrFail($id);
+    return view('alumni.edit', compact('alumni'));
 }
+
+public function update(Request $request, $id)
+{
+    $alumni = Alumni::findOrFail($id);
+    $alumni->update($request->all());
+
+    return redirect()->route('dashboard')->with('success', 'Data berhasil diperbarui!');
+
+
+}
+
+public function destroy($id)
+{
+    $alumni = Alumni::findOrFail($id);
+    $alumni->delete();
+
+    return redirect()->route('alumni.index')->with('success', 'Data berhasil dihapus');
+}
+public function index()
+{
+    $alumnis = Alumni::all(); // Pastikan variabel ini ada
+    return view('alumni.index', compact('alumnis')); // Pastikan ini sesuai
+}
+
+
+
+
+}
+
+
+
+
+
