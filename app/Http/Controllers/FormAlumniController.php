@@ -48,7 +48,6 @@ class FormAlumniController extends Controller
 
         return redirect()->route('menu')->with('success', 'Data berhasil disimpan!');
 
-        dd(DB::getQueryLog()); // Cek query yang dieksekusi
     }
 
 

@@ -43,7 +43,6 @@ route::get('statistik',[StatistikController::class, 'statistik'])->name('statist
 Route::get('/alumni', [FormAlumniController::class, 'index'])->name('alumni.index');
 Route::get('/alumni/{id}/edit', [FormAlumniController::class, 'edit'])->name('alumni.edit');
 Route::put('/formalumni/{id}', [FormAlumniController::class, 'update'])->name('formalumni.update');
-
 Route::delete('/alumni/{id}', [FormAlumniController::class, 'destroy'])->name('alumni.destroy');
 
 

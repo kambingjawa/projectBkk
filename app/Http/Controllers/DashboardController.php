@@ -33,6 +33,29 @@ class DashboardController extends Controller
         return view('dashboard', compact('alumnis')); // Kirim ke view
     }
     
+    public function index(Request $request)
+{
+    $query = Alumni::query();
+
+    if ($request->has('status')) {
+        $status = $request->status;
+
+        if ($status == 'Kerja') {
+            $query->select('nisn', 'nama', 'alamat', 'email', 'no_hp', 'jurusan', 'tahun_lulus', 'profesi', 'jabatan', 'lokasi_kerja', 'gaji_kerja', 'alasan_kerja');
+        } elseif ($status == 'Kuliah') {
+            $query->select('nisn', 'nama', 'alamat', 'email', 'no_hp', 'jurusan', 'tahun_lulus', 'nama_kampus', 'jurusan_kuliah', 'alamat_kuliah', 'alasan_kuliah');
+        } elseif ($status == 'Wirausaha') {
+            $query->select('nisn', 'nama', 'alamat', 'email', 'no_hp', 'jurusan', 'tahun_lulus', 'bidang_usaha', 'lokasi_wirausaha', 'gaji_wirausaha', 'alasan_wirausaha');
+        } elseif ($status == 'Tidak') {
+            $query->select('nisn', 'nama', 'alamat', 'email', 'no_hp', 'jurusan', 'tahun_lulus');
+        }
+    }
+
+    $alumnis = $query->get();
+
+    return view('dashboard', compact('alumnis'));
+}
+
 
        
 
