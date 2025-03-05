@@ -8,32 +8,34 @@ use Illuminate\Support\Facades\Storage;
 
 class InfoLowonganController extends Controller
 {
-   
-    public function infolowongan()
-{
-    $lowongans = LowonganKerja::orderBy('created_at', 'desc')->get();
-    return view('infolowongan', compact('lowongans'));
+    // Menampilkan daftar lowongan kerja dengan fitur pencarian
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
 
-    
-}
+        $lowongans = LowonganKerja::when($search, function ($query) use ($search) {
+            return $query->where('judul', 'like', "%{$search}%")
+                         ->orWhere('deskripsi', 'like', "%{$search}%")
+                         ->orWhere('tags', 'like', "%{$search}%");
+        })->orderBy('created_at', 'desc')->get();
 
-public function index()
-{
-    $lowongans = LowonganKerja::orderBy('created_at', 'desc')->get();
-    return view('dashboard_lowongan', compact('lowongans'));
-}
+        return view('dashboard_lowongan', compact('lowongans'));
+    }
 
+    // Menampilkan detail lowongan kerja berdasarkan ID
     public function show($id)
     {
         $lowongan = LowonganKerja::findOrFail($id);
         return view('detail-lowongan', compact('lowongan'));
     }
 
+    // Menampilkan halaman tambah lowongan kerja
     public function create()
     {
         return view('create-lowongan');
     }
 
+    // Menyimpan data lowongan kerja ke database
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -54,12 +56,14 @@ public function index()
         return redirect()->route('lowongan.index')->with('success', 'Lowongan berhasil ditambahkan!');
     }
 
+    // Menampilkan halaman edit lowongan kerja
     public function edit($id)
     {
         $lowongan = LowonganKerja::findOrFail($id);
         return view('edit-lowongan', compact('lowongan'));
     }
 
+    // Menyimpan perubahan data lowongan kerja
     public function update(Request $request, $id)
     {
         $lowongan = LowonganKerja::findOrFail($id);
@@ -85,6 +89,7 @@ public function index()
         return redirect()->route('lowongan.index')->with('success', 'Lowongan berhasil diperbarui!');
     }
 
+    // Menghapus lowongan kerja
     public function destroy($id)
     {
         $lowongan = LowonganKerja::findOrFail($id);

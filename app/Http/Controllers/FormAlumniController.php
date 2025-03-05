@@ -51,33 +51,21 @@ class FormAlumniController extends Controller
     }
 
 
-public function edit($id)
-{
-    $alumni = Alumni::findOrFail($id);
-    return view('alumni.edit', compact('alumni'));
-}
-
-public function update(Request $request, $id)
-{
-    $alumni = Alumni::findOrFail($id);
-    $alumni->update($request->all());
-
-    return redirect()->route('dashboard')->with('success', 'Data berhasil diperbarui!');
 
 
-}
-
-public function destroy($id)
-{
-    $alumni = Alumni::findOrFail($id);
-    $alumni->delete();
-
-    return redirect()->route('alumni.index')->with('success', 'Data berhasil dihapus');
-}
+    public function destroy($id) {
+        $alumni = Alumni::find($id);
+        if ($alumni) {
+            $alumni->delete();
+            return redirect()->route('dashboard')->with('success', 'Data berhasil dihapus!');
+        }
+        return redirect()->route('dashboard')->with('error', 'Data tidak ditemukan!');
+    }
+    
 public function index()
 {
     $alumnis = Alumni::all(); // Pastikan variabel ini ada
-    return view('alumni.index', compact('alumnis')); // Pastikan ini sesuai
+    return view('dashboard', compact('alumnis')); // Pastikan ini sesuai
 }
 
 

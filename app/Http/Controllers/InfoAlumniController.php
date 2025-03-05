@@ -8,29 +8,40 @@ use Illuminate\Support\Facades\Storage;
 
 class InfoAlumniController extends Controller
 {
+    // Menampilkan daftar informasi alumni dengan fitur pencarian
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+
+        $infoAlumni = InfoAlumni::when($search, function ($query) use ($search) {
+            return $query->where('judul', 'like', "%{$search}%")
+                         ->orWhere('author', 'like', "%{$search}%");
+        })->orderBy('tanggal', 'desc')->get();
+
+        return view('dashboard_info', compact('infoAlumni'));
+    }
+
+    // Menampilkan menu informasi alumni
     public function infoalumnimenu()
     {
         $infoAlumni = InfoAlumni::orderBy('tanggal', 'desc')->get();
         return view('infoalumnimenu', compact('infoAlumni'));
     }
 
-    public function index()
-    {
-        $infoAlumni = InfoAlumni::orderBy('tanggal', 'desc')->get();
-        return view('dashboard_info', compact('infoAlumni'));
-    }
-
+    // Menampilkan detail informasi alumni berdasarkan ID
     public function show($id)
     {
         $infoAlumni = InfoAlumni::findOrFail($id);
         return view('detail-info', compact('infoAlumni'));
     }
 
+    // Menampilkan form tambah informasi alumni
     public function create()
     {
         return view('create-info');
     }
 
+    // Menyimpan data informasi alumni yang baru
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -43,6 +54,7 @@ class InfoAlumniController extends Controller
             'tags' => 'nullable|string',
         ]);
 
+        // Simpan gambar jika ada
         if ($request->hasFile('gambar')) {
             $validatedData['gambar'] = $request->file('gambar')->store('infoalumni_gambar', 'public');
         }
@@ -52,12 +64,14 @@ class InfoAlumniController extends Controller
         return redirect()->route('infoalumni.index')->with('success', 'Informasi alumni berhasil ditambahkan!');
     }
 
+    // Menampilkan form edit informasi alumni
     public function edit($id)
     {
         $infoAlumni = InfoAlumni::findOrFail($id);
         return view('edit-info', compact('infoAlumni'));
     }
 
+    // Memperbarui data informasi alumni berdasarkan ID
     public function update(Request $request, $id)
     {
         $infoAlumni = InfoAlumni::findOrFail($id);
@@ -72,6 +86,7 @@ class InfoAlumniController extends Controller
             'tags' => 'nullable|string',
         ]);
 
+        // Update gambar jika ada
         if ($request->hasFile('gambar')) {
             if ($infoAlumni->gambar) {
                 Storage::disk('public')->delete($infoAlumni->gambar);
@@ -84,10 +99,12 @@ class InfoAlumniController extends Controller
         return redirect()->route('infoalumni.index')->with('success', 'Informasi alumni berhasil diperbarui!');
     }
 
+    // Menghapus informasi alumni berdasarkan ID
     public function destroy($id)
     {
         $infoAlumni = InfoAlumni::findOrFail($id);
 
+        // Hapus gambar jika ada
         if ($infoAlumni->gambar) {
             Storage::disk('public')->delete($infoAlumni->gambar);
         }
