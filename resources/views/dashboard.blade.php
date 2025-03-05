@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
-            {{ __('Info Alumni') }}
+            {{ __('Data Alumni') }}
         </h2>
     </x-slot>
 
-    <div class="flex min-h-screen bg-gray-200 p-6">
+    <div class="flex min-h-screen bg-gray-900 p-6">
         <div class="flex-1">
             <!-- Form Pencarian -->
             <form method="GET" action="{{ route('dashboard') }}" class="mb-4 flex">
@@ -18,7 +18,6 @@
 
             <!-- Filter Status -->
             <div class="mb-4 space-x-2">
-                <a href="{{ route('dashboard') }}" class="p-2 bg-gray-300 rounded text-white">Semua</a>
                 <a href="{{ route('dashboard', ['status' => 'Kerja']) }}" class="p-2 bg-green-300 rounded text-white {{ request('status') == 'Bekerja' ? 'font-bold' : '' }}">Bekerja</a>
                 <a href="{{ route('dashboard', ['status' => 'Wirausaha']) }}" class="p-2 bg-yellow-300 rounded text-white {{ request('status') == 'Wirausaha' ? 'font-bold' : '' }}">Wirausaha</a>
                 <a href="{{ route('dashboard', ['status' => 'Kuliah']) }}" class="p-2 bg-blue-300 rounded text-white {{ request('status') == 'Kuliah' ? 'font-bold' : '' }}">Kuliah</a>

@@ -31,7 +31,7 @@
     <section class="bg-gray-200 p-4 rounded-lg shadow-md mb-6">
       <h2 class="font-bold text-lg mb-2">MENU ALUMNI</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <a href="{{ route('infoalumni') }}" class="block">
+        <a href="{{ route('infoalumnimenu') }}" class="block">
           <div class="bg-red-400 p-4 rounded-lg flex items-center text-lg w-full h-32">
             <img src="{{ asset('images/alumni.png') }}" alt="Info Alumni" class="h-12 mr-3" />
             <span class="text-white">Info Alumni</span>
@@ -62,7 +62,7 @@
             <span class="text-white">Data Alumni</span>
           </div>
         </a>
-        <a href="#" class="block">
+        <a href="{{ route('statistik') }}" class="block">
           <div class="bg-blue-500 p-4 rounded-lg flex items-center text-lg w-full h-32">
             <img src="{{ asset('images/statistik.png') }}" alt="Statistik Alumni" class="h-12 mr-3" />
             <span class="text-white">Statistik Alumni</span>

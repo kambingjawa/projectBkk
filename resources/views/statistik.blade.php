@@ -1,90 +1,50 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistik Alumni</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-b from-blue-500 to-blue-300 text-white text-center p-5">
-    <h2 class="text-2xl font-bold">Statistik Data Bursa Kerjo Kito</h2>
-    <div class="bg-gray-300 text-black p-3 rounded-lg inline-block my-4">
-        <p>Total Seluruh Data Alumni</p>
-        <span class="bg-green-700 text-white px-4 py-1 rounded-lg font-bold">TOTAL</span>
-    </div>
-    <div class="container mx-auto p-5 bg-white text-black rounded-lg shadow-lg">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div class="bg-white p-4 rounded-lg shadow">
-                <canvas id="chartJurusan"></canvas>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <canvas id="chartTahun"></canvas>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <canvas id="chartGaji"></canvas>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow">
-                <canvas id="chartProfesi"></canvas>
-            </div>
+<body class="bg-gradient-to-b from-blue-500 to-blue-300 min-h-screen flex flex-col items-center py-10">
+
+    <h2 class="text-white text-3xl font-bold mb-6">Statistik Data Bursa Kerjo Kito</h2>
+
+    <div class="bg-white p-4 rounded-lg shadow-lg mb-6">
+        <p class="text-gray-700">Total Seluruh Data Alumni</p>
+        <div class="text-center text-lg font-bold bg-green-600 text-white rounded-md px-4 py-2">
+            {{ \App\Models\Alumni::count() }}
         </div>
     </div>
 
-<script>
-    const ctxJurusan = document.getElementById('chartJurusan').getContext('2d');
-    new Chart(ctxJurusan, {
-        type: 'bar',
-        data: {
-            labels: ['PPLG', 'TJKT', 'DKV', 'ULP', 'PM', 'MPLB', 'AKL', 'AM'],
-            datasets: [{
-                label: 'Jumlah Data Lulusan',
-                data: [50, 50, 50, 50, 50, 50, 50, 50],
-                backgroundColor: 'red'
-            }]
-        }
-    });
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl">
+        <!-- Alumni Jurusan -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-lg font-bold mb-2">Alumni Jurusan</h3>
+            <canvas id="chartJurusan"></canvas>
+        </div>
 
-    const ctxTahun = document.getElementById('chartTahun').getContext('2d');
-    new Chart(ctxTahun, {
-        type: 'line',
-        data: {
-            labels: ['PPLG', 'TJKT', 'DKV', 'ULP', 'PM', 'MPLB', 'AKL', 'AM'],
-            datasets: [{
-                label: 'Lulusan Tahun Lalu',
-                data: [10, 15, 8, 12, 9, 14, 7, 11],
-                borderColor: 'orange'
-            }, {
-                label: 'Lulusan Tahun Ini',
-                data: [20, 18, 25, 22, 28, 30, 27, 35],
-                borderColor: 'blue'
-            }]
-        }
-    });
+        <!-- Alumni per Tahun -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-lg font-bold mb-2">Alumni per Tahun</h3>
+            <canvas id="chartTahun"></canvas>
+        </div>
 
-    const ctxGaji = document.getElementById('chartGaji').getContext('2d');
-    new Chart(ctxGaji, {
-        type: 'pie',
-        data: {
-            labels: ['<= 2.500.000', '2.500.000 - 5.000.000', '5.000.000 - 15.000.000', '> 15.000.000'],
-            datasets: [{
-                data: [25, 30, 20, 25],
-                backgroundColor: ['red', 'blue', 'purple', 'green']
-            }]
-        }
-    });
+        <!-- Rentang Gaji -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-lg font-bold mb-2">Rentang Gaji</h3>
+            <canvas id="chartGaji"></canvas>
+        </div>
 
-    const ctxProfesi = document.getElementById('chartProfesi').getContext('2d');
-    new Chart(ctxProfesi, {
-        type: 'doughnut',
-        data: {
-            labels: ['Kuliah', 'Bekerja', 'Wirausaha', 'Menganggur'],
-            datasets: [{
-                data: [30, 40, 20, 10],
-                backgroundColor: ['red', 'green', 'blue', 'gray']
-            }]
-        }
-    });
+        <!-- Rasio Profesi Alumni -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-lg font-bold mb-2">Rasio Profesi Alumni</h3>
+            <canvas id="chartProfesi"></canvas>
+        </div>
+    </div>
 
-</script>
-
-<footer class="bg-blue-800 text-white p-6 mt-8">
+    <footer class="bg-blue-800 text-white p-6 mt-8">
     <!-- Grid dengan dua kolom: Logo & Informasi (kiri) & Ikon Sosial Media (kanan) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center md:text-left">
       <!-- Kolom Logo & Informasi -->
@@ -138,26 +98,67 @@
         </div>
       </div>
     </div>
-    <!-- Divider Line -->
-    <div class="border-t border-white mt-6"></div>
-    <!-- Bagian Hubungi Kami dan Kontak Tambahan -->
-    <div class="mt-6">
-      <p class="font-semibold tracking-wider text-sm text-center">Hubungi kami di:</p>
-      <div class="w-1/2 grid grid-cols-2 mx-auto place-items-center">
-        <a href="http://wa.me/6289628893111">
-          <svg xmlns="http://www.w3.org/2000/svg" width="60" viewBox="0 0 512 512">
-            <path fill="#dfe900" d="M255.995 73.82A182.18 182.18 0 1 0 438.185 256a182.183 182.183 0 0 0-182.19-182.18zm93.956 251.72c-7.823 12.093-14.617 24.635-47.285 25.382-33.399.035-67.931-27.624-93.085-55.213-25.111-24.433-48.35-55.986-48.314-86.572.747-32.678 13.298-39.48 25.383-47.285a12.372 12.372 0 0 1 12.384 2.232c5.757 5.001 31.007 30.26 31.007 30.26s8.974 7.49 2.778 15.778c-4.922 6.608-16.287 18.773-17.78 20.372l4.271 8.033c5.704 9.404 16.576 25.928 32.854 39.323 10.986 9.017 29.558 18.923 29.558 18.914 2.672-2.479 13.763-12.761 19.95-17.385 8.298-6.205 15.786 2.778 15.786 2.778s25.26 25.26 30.27 31.024a12.361 12.361 0 0 1 2.223 12.358z" data-name="Call"/>
-          </svg>
-          <span class="text-xs">Maya</span>
-        </a>
-        <a href="http://wa.me/6282261962048">
-          <svg xmlns="http://www.w3.org/2000/svg" width="60" viewBox="0 0 512 512">
-            <path fill="#dfe900" d="M255.995 73.82A182.18 182.18 0 1 0 438.185 256a182.183 182.183 0 0 0-182.19-182.18zm93.956 251.72c-7.823 12.093-14.617 24.635-47.285 25.382-33.399.035-67.931-27.624-93.085-55.213-25.111-24.433-48.35-55.986-48.314-86.572.747-32.678 13.298-39.48 25.383-47.285a12.372 12.372 0 0 1 12.384 2.232c5.757 5.001 31.007 30.26 31.007 30.26s8.974 7.49 2.778 15.778c-4.922 6.608-16.287 18.773-17.78 20.372l4.271 8.033c5.704 9.404 16.576 25.928 32.854 39.323 10.986 9.017 29.558 18.923 29.558 18.914 2.672-2.479 13.763-12.761 19.95-17.385 8.298-6.205 15.786 2.778 15.786 2.778s25.26 25.26 30.27 31.024a12.361 12.361 0 0 1 2.223 12.358z" data-name="Call"/>
-          </svg>
-          <span class="text-xs">Fachri</span>
-        </a>
-      </div>
-    </div>
+    
   </footer>
+
+    <script>
+        // Chart Jurusan
+        var ctxJurusan = document.getElementById('chartJurusan').getContext('2d');
+        new Chart(ctxJurusan, {
+            type: 'bar',
+            data: {
+                labels: @json($jurusanData->pluck('jurusan')),
+                datasets: [{
+                    label: 'Jumlah Data Lulusan',
+                    data: @json($jurusanData->pluck('total')),
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                }]
+            }
+        });
+
+        // Chart Tahun Lulus
+        var ctxTahun = document.getElementById('chartTahun').getContext('2d');
+        new Chart(ctxTahun, {
+            type: 'line',
+            data: {
+                labels: @json($tahunData->pluck('tahun_lulus')),
+                datasets: [{
+                    label: 'Lulusan per Tahun',
+                    data: @json($tahunData->pluck('total')),
+                    borderColor: 'blue',
+                    fill: false
+                }]
+            }
+        });
+
+        // Chart Rentang Gaji
+        var ctxGaji = document.getElementById('chartGaji').getContext('2d');
+        new Chart(ctxGaji, {
+            type: 'pie',
+            data: {
+                labels: @json(array_keys($gajiData)),
+                datasets: [{
+                    data: @json(array_values($gajiData)),
+                    backgroundColor: ['red', 'blue', 'purple', 'green']
+                }]
+            }
+        });
+
+        // Chart Rasio Profesi
+        var ctxProfesi = document.getElementById('chartProfesi').getContext('2d');
+        new Chart(ctxProfesi, {
+            type: 'doughnut',
+            data: {
+                labels: @json(array_keys($profesiData)),
+                datasets: [{
+                    data: @json(array_values($profesiData)),
+                    backgroundColor: ['red', 'green', 'blue', 'gray']
+                }]
+            }
+        });
+    </script>
+
+
+
 </body>
-</html>
+</html>    
